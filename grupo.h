@@ -4,6 +4,7 @@
 struct grupo
 {
     int num_pessoas;
+    int senha;
 
 };
 typedef struct grupo Grupo;

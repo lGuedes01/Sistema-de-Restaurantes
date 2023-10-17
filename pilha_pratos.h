@@ -2,13 +2,10 @@
 #define PILHA_P_H
 
 #include <stdbool.h>
-
-#define LIMPO true
-#define SUJO false
-
 struct pratos
 {
-    bool estado;
+    bool usando;
+    int id;
     struct pratos* prox;    
 };
 
