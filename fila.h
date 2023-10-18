@@ -3,13 +3,23 @@
 
 #include "grupo.h"
 
-struct fila
+struct lista
 {
-    struct fila* prox;
+    struct lista* prox;
     Grupo grupo;
 };
 
+typedef struct lista Lista;
+
+struct fila
+{
+    Lista* ini;
+    Lista* fim;
+};
 typedef struct fila Fila;
 
 
+Fila* cria_fila();
+void insere_fila(Fila* f, Grupo gp);
+void grupo_espera_fila(Fila* f, Grupo gp);
 #endif

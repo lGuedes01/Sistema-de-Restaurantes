@@ -9,5 +9,7 @@ struct grupo
 };
 typedef struct grupo Grupo;
 
+void add_grupo(Mesa** mesas, Quantidade qt_mesas, Fila* fila_espera);
+
 
 #endif
