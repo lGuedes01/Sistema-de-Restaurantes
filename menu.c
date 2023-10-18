@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "menu.h"
-#include "mesa.h"
-#include "fila.h"
-#include "pilha_pratos.h"
-#include "grupo.h"
+
 
 
 void escolhe(Mesa** mesas, Quantidade qt_mesas, Fila* fila_espera){
@@ -28,6 +25,16 @@ void menu(int option, Mesa** mesas, Quantidade qt_mesas, Fila* fila_espera){
     {
     case 1:
         add_grupo(mesas, qt_mesas, fila_espera);
+        break;
+    case 2:
+        if(liberar_mesa(mesas, qt_mesas))
+        {
+            coloca_grupo_na_mesa(mesas, qt_mesas,fila_espera);
+        }
+        
+        break;
+    case 3:
+        desistir_de_esperar(fila_espera);
         break;
     
     default:

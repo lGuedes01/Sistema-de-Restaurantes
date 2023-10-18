@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "menu.h"
 #include "mesa.h"
-#include "fila.h"
-#include "pilha_pratos.h"
-#include "grupo.h"
 
 
 Mesa** aloca_mesas(int lin, int col){
@@ -38,7 +34,7 @@ Mesa** cria_mesas(Quantidade qt_mesas){
         for (int j = 0; j < qt_mesas.col; j++, cont++)
         {
             Mesa* mesa_atual = &mesas[i][j];
-            mesa_atual->pessoas = 0;
+            mesa_atual->pessoas = 0; 
             mesa_atual->num_mesa = cont;
             mesa_atual->comanda = mesa_atual->num_mesa;
             mesa_atual->ocupada = false;
@@ -89,3 +85,23 @@ void reserva_mesa(int pessoas, Mesa* mesa_para_reservar){
     mesa_para_reservar->ocupada = true;
     mesa_para_reservar->pessoas = pessoas;
 }
+
+bool liberar_mesa(Mesa** mesas, Quantidade qt_mesas){
+    int num;
+    printf("Informe o numero da mesa para liberar:");
+    scanf("%d", &num);
+    for (int i = 0; i < qt_mesas.lin; i++)
+    {
+        for (int j = 0; j < qt_mesas.col; j++)
+        {
+            if (mesas[i][j].num_mesa == num)
+            {
+                mesas[i][j].ocupada = false;
+                mesas[i][j].pessoas = 0;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+

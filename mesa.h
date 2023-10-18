@@ -21,6 +21,11 @@ struct quantidade
 };
 typedef struct quantidade Quantidade;
 
+#include "menu.h"
+#include "fila.h"
+#include "pilha_pratos.h"
+#include "grupo.h"
+
 
 Mesa** aloca_mesas(int lin, int col);
 Quantidade quantidade_mesas();
@@ -31,6 +36,8 @@ void imprime_mesas(Mesa** mesas, Quantidade qt_mesas);
 Mesa* verifica_mesa_livre(Mesa** mesas, Quantidade qt_mesas);
 
 void reserva_mesa(int pessoas, Mesa* mesa_para_reservar);
+
+bool liberar_mesa(Mesa** mesas, Quantidade qt_mesas);
 
 
 #endif

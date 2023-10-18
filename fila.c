@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "menu.h"
-#include "mesa.h"
+
 #include "fila.h"
-#include "pilha_pratos.h"
-#include "grupo.h"
 
 
 
@@ -37,4 +34,39 @@ void grupo_espera_fila(Fila* f, Grupo gp){
     else
         gp.senha = f->fim->grupo.senha + 1;
     insere_fila(f,gp);
+}
+
+void retira_da_fila(Fila* f){
+    if (f->fim != NULL)
+    {
+        Lista* l = f->ini;
+        if (f->ini == f->fim)
+            f->ini = f->fim = NULL;
+        else
+            f->ini = f->ini->prox;
+        free(l);       
+    }
+}
+
+void desistir_de_esperar(Fila* f){
+    int pos;
+    printf("Qual a posicao da fila que o grupo esta (Ex: 1 = primeiro da fila): ");
+    scanf("%d", &pos);
+    Fila* f1 = f;
+    int i;
+    for (i = 1; i <= pos; i++, f1->ini = f1->ini->prox)
+    {
+        if (f1->ini == NULL)
+        {
+            printf("Essa posicao nao existe. Tente novamente\n");
+            break;
+        }
+        else if (i == pos)
+        {
+            retira_da_fila(f1);
+        }
+    }
+    
+
+
 }
