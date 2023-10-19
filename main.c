@@ -9,13 +9,12 @@
 
 int main()
 {
-    Fila* fila_espera;
+    Fila *fila_espera;
     fila_espera = cria_fila();
-    Mesa** mesas;
+    Mesa **mesas;
     Quantidade qt_mesas;
     qt_mesas = quantidade_mesas();
     mesas = cria_mesas(qt_mesas);
-    // imprime_mesas(mesas, qt_mesas);
-    system("pause");
+    escolhe(mesas, qt_mesas, fila_espera);
     return 0;
 }

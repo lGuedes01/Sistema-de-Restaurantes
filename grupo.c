@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "menu.h"
+#include "mesa.h"
+#include "fila.h"
+#include "pilha_pratos.h"
 #include "grupo.h"
-
 void add_grupo(Mesa** mesas, Quantidade qt_mesas, Fila* fila_espera){
     Grupo gp;
     Mesa* mesa_do_gp;
@@ -14,7 +17,7 @@ void add_grupo(Mesa** mesas, Quantidade qt_mesas, Fila* fila_espera){
         if (mesa_do_gp == NULL)
         {
             grupo_espera_fila(fila_espera,gp);
-            return;
+            break;
         }
         else
         {
