@@ -3,9 +3,6 @@
 #include <stdbool.h>
 
 #include "fila.h"
-//oi
-
-
 
 Fila* cria_fila(){
     Fila* f;
@@ -15,6 +12,7 @@ Fila* cria_fila(){
     f->fim = NULL;
     return f;
 }
+
 
 void insere_fila(Fila* f, Grupo gp){
     Lista* l;
