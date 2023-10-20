@@ -32,7 +32,6 @@ Quantidade quantidade_mesas()
 
 Mesa **cria_mesas(Quantidade qt_mesas)
 {
-
     Mesa **mesas = aloca_mesas(qt_mesas.lin, qt_mesas.col);
     int cont = 1;
     for (int i = 0; i < qt_mesas.lin; i++)
@@ -80,33 +79,39 @@ Mesa *verifica_mesa_livre(Mesa **mesas, Quantidade qt_mesas)
     return NULL;
 }
 
-void reserva_mesa(int pessoas, Mesa *mesa_para_reservar)
+void reserva_mesa(int pessoas, Mesa *mesa_para_reservar, Pilha *pilha_pratos)
 {
     mesa_para_reservar->ocupada = true;
     mesa_para_reservar->pessoas = pessoas;
+    tirar_pratos(pessoas, pilha_pratos, mesa_para_reservar);
 }
 
-bool liberar_mesa(Mesa **mesas, Quantidade qt_mesas)
+void liberar_prato_lista(Listapratos **lista)
 {
-    int num = 0;
-    printf("Informe o numero da mesa para liberar:");
-    scanf("%d", &num);
-    printf("???????");
+    while (*lista != NULL)
+    {
+        Listapratos *temp = *lista;
+        *lista = (*lista)->prox;
+        free(temp->prato);
+        free(temp);
+    }
+}
+
+bool liberar_mesa(Mesa **mesas, Quantidade qt_mesas, int num)
+{
     for (int i = 0; i < qt_mesas.lin; i++)
     {
         for (int j = 0; j < qt_mesas.col; j++)
         {
-            printf("erro1");
             if (mesas[i][j].num_mesa == num)
             {
-                printf("erro");
                 mesas[i][j].ocupada = false;
                 mesas[i][j].pessoas = 0;
+                Listapratos *l = mesas[i][j].pratos_mesa;
+                liberar_prato_lista(&l);
                 return true;
             }
-            printf("erro2");
         }
     }
-    printf("erro3");
     return false;
 }

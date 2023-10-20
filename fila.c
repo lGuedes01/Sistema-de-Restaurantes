@@ -77,10 +77,15 @@ void desistir_de_esperar(Fila *f)
 void imprime_fila(Fila *f)
 {
     int i = 1;
+    if (f->ini == NULL)
+    {
+        printf("A fila está vazia.\n");
+        return;
+    }
     for (Lista *l = f->ini; l != NULL; l = l->prox, i++)
     {
         printf("Grupo %d", i);
         printf("\n\t Senha: %d", l->grupo.senha);
-        printf("\n\t Numero de pessoas\n: %d\n", l->grupo.num_pessoas);
+        printf("\n\t Numero de pessoas: %d\n\n", l->grupo.num_pessoas);
     }
 }

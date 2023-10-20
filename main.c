@@ -13,8 +13,15 @@ int main()
     fila_espera = cria_fila();
     Mesa **mesas;
     Quantidade qt_mesas;
+    Pilha *pilha_pratos;
     qt_mesas = quantidade_mesas();
     mesas = cria_mesas(qt_mesas);
-    escolhe(mesas, qt_mesas, fila_espera);
+    pilha_pratos = criar_pilha();
+    colocar_pratos(qt_mesas.n_mesas * 4, pilha_pratos);
+    for (int i = 1; i < qt_mesas.n_mesas + 1; i++)
+    {
+        arrumar_mesa(mesas, qt_mesas, pilha_pratos, i);
+    }
+    escolhe(mesas, qt_mesas, fila_espera, pilha_pratos);
     return 0;
 }
