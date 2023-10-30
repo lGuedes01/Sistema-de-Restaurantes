@@ -17,7 +17,7 @@ int main()
     qt_mesas = quantidade_mesas();
     mesas = cria_mesas(qt_mesas);
     pilha_pratos = criar_pilha();
-    colocar_pratos(qt_mesas.n_mesas * 4, pilha_pratos);
+    pilha_pratos = colocar_pratos(qt_mesas.n_mesas * 4, pilha_pratos);
     for (int i = 1; i < qt_mesas.n_mesas + 1; i++)
     {
         arrumar_mesa(mesas, qt_mesas, pilha_pratos, i);

@@ -12,13 +12,14 @@ Pilha *criar_pilha()
     return nova_pilha;
 }
 
-void push_novo_prato(Pilha *pilha)
+Pilha* push_novo_prato(Pilha *pilha)
 {
     Pratos *novo_prato = (Pratos *)malloc(sizeof(Pratos));
     novo_prato->usando = false;
     novo_prato->id = pilha->prim ? pilha->prim->id + 1 : 1;
     novo_prato->prox = pilha->prim;
     pilha->prim = novo_prato;
+    return pilha;
 }
 
 void push_prato_existente(Pilha *pilha, Pratos *novo_prato)
@@ -40,18 +41,10 @@ Pratos *pop(Pilha *pilha)
     return prato_removido;
 }
 
-Listapratos *insere_na_mesa(Pratos *prato, Listapratos *lista_pratos)
+Pratos* insere_na_mesa(Pratos *prato, Pratos *lista_pratos_na_mesa)
 {
-    Listapratos *prato_novo = (Listapratos *)malloc(sizeof(Listapratos));
-
-    if (prato_novo == NULL)
-    {
-        printf("Erro ao alocar memória para o novo prato.\n");
-        exit(1); 
-    }
-    prato_novo->prato = prato;
-    prato_novo->prox = lista_pratos;
-    return prato_novo;
+    prato->prox = lista_pratos_na_mesa;
+    return prato;
 }
 
 int tam_pilha(Pilha *pilha_pratos){
@@ -94,51 +87,40 @@ bool arrumar_mesa(Mesa **mesas, Quantidade qt_mesas, Pilha *pilha_pratos, int nu
     return true;
 }
 
-void colocar_pratos(int num_pratos, Pilha *pilha_pratos)
+Pilha* colocar_pratos(int num_pratos, Pilha *pilha_pratos)
 {
     for (int i = 0; i < num_pratos; i++)
     {
-        push_novo_prato(pilha_pratos);
+        pilha_pratos = push_novo_prato(pilha_pratos);
     }
+    return pilha_pratos;
 }
 
-void repor_pratos(Pilha *pilha_pratos)
+Pilha* repor_pratos(Pilha *pilha_pratos)
 {
     int num_pratos = 0;
     printf("Informe o numero de pratos a serem colocados na pilha:");
     scanf("%d", &num_pratos);
-    colocar_pratos(num_pratos, pilha_pratos);
+    pilha_pratos = colocar_pratos(num_pratos, pilha_pratos);
+    return pilha_pratos;
 }
 
-Pratos *tirar_prato_lista(Listapratos **l)
+Pratos *tirar_prato_lista(Pratos* pratos_da_mesa)
 {
-    if (*l == NULL)
-    {
-        return NULL;
-    }
-
-    Listapratos *tirar = *l;  
-    Pratos *n = tirar->prato; 
-
-    *l = tirar->prox; 
-
-    free(tirar); 
-
-    return n; 
+    Pratos* p = pratos_da_mesa;
+    pratos_da_mesa = pratos_da_mesa->prox;
+    return p;
 }
 
-void tirar_pratos(int n_p, Pilha *pilha_pratos, Mesa *mesa)
+Pratos* tirar_pratos(int num_pessoas, Pilha *pilha_pratos, Mesa *mesa)
 {
-    int pratos_tirar = 0;
-
-    pratos_tirar = MAX_PESSOAS - n_p;
-
-    Pratos *aux;
-    for (int i = 0; i < pratos_tirar; i++)
+    int num_pratos_para_retirar = MAX_PESSOAS - num_pessoas;
+    for (int i = 0; i < num_pratos_para_retirar; i++)
     {
-        aux = tirar_prato_lista(&(mesa->pratos_mesa));
-        push_prato_existente(pilha_pratos, aux);
+        Pratos* prato_retirado = tirar_prato_lista(mesa->pratos_mesa);
+        push_prato_existente(pilha_pratos, prato_retirado);
     }
+    return mesa->pratos_mesa;    
 }
 
 void imprimir_pilha(Pilha *pilha)

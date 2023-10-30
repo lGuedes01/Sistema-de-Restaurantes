@@ -52,7 +52,7 @@ void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilh
                 while (!arrumar_mesa(mesas, qt_mesas, pilha_pratos, num))
                 {
                     printf("teste\n");
-                    repor_pratos(pilha_pratos);
+                    pilha_pratos = repor_pratos(pilha_pratos);
                 }
                 coloca_grupo_na_mesa(mesas, qt_mesas, fila_espera, pilha_pratos);
                 

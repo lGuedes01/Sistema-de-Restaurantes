@@ -16,7 +16,7 @@ struct mesa
     int num_mesa;
     bool ocupada;
     bool arrumada;
-    Listapratos *pratos_mesa;
+    Pratos *pratos_mesa;
 };
 
 struct quantidade
@@ -42,7 +42,7 @@ Mesa *verifica_mesa_livre(Mesa **mesas, Quantidade qt_mesas);
 void reserva_mesa(int pessoas, Mesa *mesa_para_reservar, Pilha *pilha_pratos);
 
 bool liberar_mesa(Mesa **mesas, Quantidade qt_mesas, int num);
-Listapratos* liberar_prato_lista(Listapratos *lista_pratos);
+Pratos* liberar_prato_lista(Pratos *lista_pratos);
 int pega_mesa();
 int proxima_comanda(Mesa **mesas, Quantidade qt_mesas);
 

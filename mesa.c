@@ -86,15 +86,15 @@ void reserva_mesa(int pessoas, Mesa *mesa_para_reservar, Pilha *pilha_pratos)
 {
     mesa_para_reservar->ocupada = true;
     mesa_para_reservar->pessoas = pessoas;
-    tirar_pratos(pessoas, pilha_pratos, mesa_para_reservar);
+    mesa_para_reservar->pratos_mesa = tirar_pratos(pessoas, pilha_pratos, mesa_para_reservar);
 
 }
 
-Listapratos* liberar_prato_lista(Listapratos *lista_pratos)
+Pratos* liberar_prato_lista(Pratos *lista_pratos)
 {
     while (lista_pratos != NULL)
     {
-        Listapratos* p = lista_pratos->prox;
+        Pratos* p = lista_pratos->prox;
         free(lista_pratos);
         lista_pratos = p;
     }
