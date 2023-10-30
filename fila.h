@@ -1,8 +1,8 @@
 #ifndef FILA_H
 #define FILA_H
 
-typedef struct lista Lista;
 
+typedef struct lista Lista;
 struct fila
 {
     Lista *ini;
@@ -17,6 +17,7 @@ typedef struct fila Fila;
 
 struct lista
 {
+    struct lista *ant;
     struct lista *prox;
     Grupo grupo;
 };
@@ -24,7 +25,8 @@ struct lista
 Fila *cria_fila();
 void insere_fila(Fila *f, Grupo gp);
 void grupo_espera_fila(Fila *f, Grupo gp);
-void retira_da_fila(Fila *f);
+void retira_da_fila(Fila* f);
+void retira_quem_desistiu_de_esperar(Lista* l);
 void desistir_de_esperar(Fila *f);
 void imprime_fila(Fila *f);
 #endif

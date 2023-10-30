@@ -4,6 +4,7 @@
         "stdlib.h": "c",
         "pilha_pratos.h": "c",
         "fila.h": "c",
-        "mesa.h": "c"
+        "mesa.h": "c",
+        "grupo.h": "c"
     }
 }

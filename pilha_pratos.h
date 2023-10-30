@@ -20,12 +20,12 @@ struct pilha
 
 typedef struct pilha Pilha;
 
-typedef struct listap Listapratos;
 struct listap
 {
     struct listap *prox;
     Pratos *prato;
 };
+typedef struct listap Listapratos;
 #include "mesa.h"
 
 void repor_pratos(Pilha *pilha_pratos);
@@ -39,7 +39,7 @@ Pratos *pop(Pilha *pilha);
 void colocar_pratos(int num_pratos, Pilha *pilha_pratos);
 void tirar_pratos(int n_p, Pilha *pilha_pratos, Mesa *mesa);
 void imprimir_pilha(Pilha *pilha);
-
+int tam_pilha(Pilha *pilha_pratos);
 Pratos *tirar_prato_lista(Listapratos **l);
 
 #endif

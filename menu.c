@@ -30,26 +30,28 @@ void escolhe(Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilha *pilha_
 int pega_mesa()
 {
     int num = 0;
-    printf("Informe o numero da mesa para liberar:");
+    printf("Informe o numero da mesa: ");
     scanf("%d", &num);
     return num;
 }
 
 void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilha *pilha_pratos)
 {
+    int num;
     switch (option)
     {
     case 1:
         add_grupo(mesas, qt_mesas, fila_espera, pilha_pratos);
         break;
     case 2:
-        int num = pega_mesa();
+        num = pega_mesa();
         if (liberar_mesa(mesas, qt_mesas,num))
         {
             if (fila_espera->ini != NULL)
             {
                 while (!arrumar_mesa(mesas, qt_mesas, pilha_pratos, num))
                 {
+                    printf("teste\n");
                     repor_pratos(pilha_pratos);
                 }
                 coloca_grupo_na_mesa(mesas, qt_mesas, fila_espera, pilha_pratos);
@@ -61,7 +63,8 @@ void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilh
         desistir_de_esperar(fila_espera);
         break;
     case 4:
-        arrumar_mesa(mesas, qt_mesas, pilha_pratos, 1);
+        num = pega_mesa();
+        arrumar_mesa(mesas, qt_mesas, pilha_pratos, num);
         break;
     case 5:
         repor_pratos(pilha_pratos);

@@ -57,6 +57,15 @@ Listapratos *insere_na_mesa(Pratos *prato, Listapratos *lista_pratos)
     return prato_novo;
 }
 
+int tam_pilha(Pilha *pilha_pratos){
+    int count = 0;
+    for (Pratos* p = pilha_pratos->prim; p  != NULL; p = p->prox)
+    {
+        count++;
+    }
+    return count;
+}
+
 bool arrumar_mesa(Mesa **mesas, Quantidade qt_mesas, Pilha *pilha_pratos, int num_mesa)
 {
     for (int i = 0; i < qt_mesas.lin; i++)
@@ -65,18 +74,21 @@ bool arrumar_mesa(Mesa **mesas, Quantidade qt_mesas, Pilha *pilha_pratos, int nu
         {
             if (mesas[i][j].num_mesa == num_mesa)
             {
-                for (int x = 0; x < 4; x++)
+                if(tam_pilha(pilha_pratos) < 4)
                 {
-                    Pratos *prato = pop(pilha_pratos);
-                    if (prato != NULL)
+                    printf("Nao tem a quantidade necessaria de pratos na pilha, reponha os pratos\n");
+                    return false;
+                }
+                else
+                {
+                    for (int x = 0; x < 4; x++)
                     {
-                        prato->usando = true;
-                        mesas[i][j].pratos_mesa = insere_na_mesa(prato, mesas[i][j].pratos_mesa);
-                    }
-                    else
-                    {
-                        printf("Erro: A pilha de pratos está vazia, reponha os pratos.\n");
-                        return false;
+                        Pratos *prato = pop(pilha_pratos);
+                        if (prato != NULL)
+                        {
+                            prato->usando = true;
+                            mesas[i][j].pratos_mesa = insere_na_mesa(prato, mesas[i][j].pratos_mesa);
+                        }
                     }
                 }
             }
