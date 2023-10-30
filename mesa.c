@@ -44,6 +44,7 @@ Mesa **cria_mesas(Quantidade qt_mesas)
             mesa_atual->num_mesa = cont;
             mesa_atual->comanda = cont;
             mesa_atual->ocupada = false;
+            mesa_atual->pratos_mesa = NULL;
         }
     }
     return mesas;
@@ -89,16 +90,16 @@ void reserva_mesa(int pessoas, Mesa *mesa_para_reservar, Pilha *pilha_pratos)
 
 }
 
-void liberar_prato_lista(Listapratos **lista)
+Listapratos* liberar_prato_lista(Listapratos *lista_pratos)
 {
-    while (*lista != NULL)
+    while (lista_pratos != NULL)
     {
-        printf("teste, pratos\n");
-        Listapratos *temp = *lista;
-        *lista = (*lista)->prox;
-        free(temp->prato);
-        free(temp);
+        Listapratos* p = lista_pratos->prox;
+        free(lista_pratos);
+        lista_pratos = p;
     }
+
+    return lista_pratos;
 }
 
 int proxima_comanda(Mesa **mesas, Quantidade qt_mesas){
@@ -125,8 +126,8 @@ bool liberar_mesa(Mesa **mesas, Quantidade qt_mesas, int num)
             {
                 mesas[i][j].ocupada = false;
                 mesas[i][j].pessoas = 0;
-                Listapratos *l = mesas[i][j].pratos_mesa;
-                liberar_prato_lista(&l);
+                
+                mesas[i][j].pratos_mesa = liberar_prato_lista(mesas[i][j].pratos_mesa);
                 mesas[i][j].comanda = proxima_comanda(mesas, qt_mesas);
                 printf("Liberou Mesa\n");
                 return true;

@@ -49,11 +49,8 @@ Listapratos *insere_na_mesa(Pratos *prato, Listapratos *lista_pratos)
         printf("Erro ao alocar memória para o novo prato.\n");
         exit(1); 
     }
-
     prato_novo->prato = prato;
-
     prato_novo->prox = lista_pratos;
-
     return prato_novo;
 }
 

@@ -23,7 +23,7 @@ typedef struct pilha Pilha;
 struct listap
 {
     struct listap *prox;
-    Pratos *prato;
+    Pratos* prato;
 };
 typedef struct listap Listapratos;
 #include "mesa.h"
