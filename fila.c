@@ -37,15 +37,10 @@ void insere_fila(Fila *f, Grupo gp)
 
 void grupo_espera_fila(Fila *f, Grupo gp)
 {
-    if (f->ini == NULL){
-        
-        printf("inserindo fila  nula\n");
+    if (f->ini == NULL)
         gp.senha = 1;
-    }
-    else{
-        printf("inserindo fila nao nula\n");
+    else
         gp.senha = f->fim->grupo.senha + 1;
-    }
     insere_fila(f, gp);
 }
 
@@ -95,6 +90,15 @@ void desistir_de_esperar(Fila *f)
     }
 }
 
+void print_corpo(char *parte_do_corpo, int num_pessoas){
+    for (int i = 0; i < num_pessoas; i++)
+    {
+        printf("%s", parte_do_corpo);
+    }
+    printf("\n");
+    
+}
+
 void imprime_fila(Fila *f)
 {
     int i = 1;
@@ -105,8 +109,10 @@ void imprime_fila(Fila *f)
     }
     for (Lista *l = f->ini; l != NULL; l = l->prox, i++)
     {
-        printf("Grupo %d", i);
-        printf("\n\t Senha: %d", l->grupo.senha);
-        printf("\n\t Numero de pessoas: %d\n\n", l->grupo.num_pessoas);
+        printf("\nGrupo %d\n", i);
+        printf("Senha: %d\n", l->grupo.senha);
+        print_corpo(" o   ", l->grupo.num_pessoas);
+        print_corpo("-|-  ", l->grupo.num_pessoas);
+        print_corpo("/ \\  ", l->grupo.num_pessoas);
     }
 }

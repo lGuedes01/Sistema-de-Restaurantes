@@ -38,6 +38,7 @@ int pega_mesa()
 void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilha *pilha_pratos)
 {
     int num;
+    int num_pratos;
     switch (option)
     {
     case 1:
@@ -51,7 +52,6 @@ void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilh
             {
                 while (!arrumar_mesa(mesas, qt_mesas, pilha_pratos, num))
                 {
-                    printf("teste\n");
                     pilha_pratos = repor_pratos(pilha_pratos);
                 }
                 coloca_grupo_na_mesa(mesas, qt_mesas, fila_espera, pilha_pratos);
@@ -67,7 +67,9 @@ void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilh
         arrumar_mesa(mesas, qt_mesas, pilha_pratos, num);
         break;
     case 5:
-        repor_pratos(pilha_pratos);
+        printf("Digite quantos pratos deseja colocar na pilha: ");
+        scanf("%d", &num_pratos);
+        pilha_pratos = colocar_pratos(num_pratos, pilha_pratos);
         break;
     case 6:
         menu_impressao(mesas, qt_mesas, fila_espera, pilha_pratos);

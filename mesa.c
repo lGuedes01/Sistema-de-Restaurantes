@@ -57,11 +57,34 @@ void imprime_mesas(Mesa **mesas, Quantidade qt_mesas)
     {
         for (int j = 0; j < qt_mesas.col; j++)
         {
-            printf("Mesa %d:\n", mesas[i][j].num_mesa);
-            printf("\tPessoas: %d\n", mesas[i][j].pessoas);
-            printf("\tComanda: %d\n", mesas[i][j].comanda);
-            // printf("\tPratos: %d\n", mesas[i][j].pratos_mesa);
-            printf("\tDisponivel: %s\n\n", mesas[i][j].ocupada ? "nao" : "sim");
+            printf("\nMesa %d\nComanda %d\n", mesas[i][j].num_mesa, mesas[i][j].comanda);
+            switch (mesas[i][j].pessoas)
+            {
+            case 0:
+                printf("\t ____\n\t |oo|\n\t |oo|\n\t ----");
+                break;
+            case 1:
+                printf("\t ____\n\t!|o |\n\t |  |\n\t ----");
+                break;
+            case 2:
+                printf("\t ____\n\t!|oo|!\n\t |  |\n\t ----");
+                break;
+            case 3:
+                printf("\t ____\n\t!|oo|!\n\t!|o |\n\t ----");
+                break;
+            case 4:
+                printf("\t ____\n\t!|oo|!\n\t!|oo|!\n\t ----");
+                break;
+            
+            default:
+                break;
+            }
+            printf("\n");
+            for (Pratos* p = mesas[i][j].pratos_mesa;p != NULL;p = p->prox)
+            {
+                printf("%d - ", p->id);
+            }
+            
         }
     }
 }

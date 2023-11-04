@@ -6,7 +6,6 @@
 
 struct pratos
 {
-    bool usando;
     int id;
     struct pratos *prox;
 };
@@ -34,12 +33,12 @@ Pilha *criar_pilha();
 
 Pratos* insere_na_mesa(Pratos *prato, Pratos *lista_pratos_na_mesa);
 Pilha* push_novo_prato(Pilha *pilha);
-void push_prato_existente(Pilha *pilha, Pratos *novo_prato);
+Pratos* push_prato_existente(Pilha *pilha, Pratos *novo_prato);
 Pratos *pop(Pilha *pilha);
 Pilha* colocar_pratos(int num_pratos, Pilha *pilha_pratos);
 Pratos* tirar_pratos(int num_pessoas, Pilha *pilha_pratos, Mesa *mesa);
 void imprimir_pilha(Pilha *pilha);
 int tam_pilha(Pilha *pilha_pratos);
-Pratos *tirar_prato_lista(Pratos* pratos_da_mesa);
+Pratos *tirar_prato_lista(Mesa* mesa);
 
 #endif
