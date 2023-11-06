@@ -9,13 +9,14 @@ Pilha *criar_pilha()
 {
     Pilha *nova_pilha = (Pilha *)malloc(sizeof(Pilha));
     nova_pilha->prim = NULL;
+    nova_pilha->idp = 0;
     return nova_pilha;
 }
 
 Pilha *push_novo_prato(Pilha *pilha)
 {
     Pratos *novo_prato = (Pratos *)malloc(sizeof(Pratos));
-    novo_prato->id = pilha->prim ? pilha->prim->id + 1 : 1;
+    novo_prato->id = pilha->idp++;
     novo_prato->prox = pilha->prim;
     pilha->prim = novo_prato;
     return pilha;

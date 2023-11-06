@@ -56,7 +56,7 @@ void imprime_mesas(Mesa **mesas, Quantidade qt_mesas)
     {
         for (int j = 0; j < qt_mesas.col; j++)
         {
-            printf("\nMesa %d\nComanda %d\n", mesas[i][j].num_mesa, mesas[i][j].comanda);
+            printf("\nMesa %d (mesa[%d][%d])\nComanda %d\n", mesas[i][j].num_mesa, i, j, mesas[i][j].comanda);
             switch (mesas[i][j].pessoas)
             {
             case 0:
@@ -79,10 +79,6 @@ void imprime_mesas(Mesa **mesas, Quantidade qt_mesas)
                 break;
             }
             printf("\n");
-            for (Pratos *p = mesas[i][j].pratos_mesa; p != NULL; p = p->prox)
-            {
-                printf("%d - ", p->id);
-            }
         }
     }
 }
@@ -138,7 +134,6 @@ int proxima_comanda(Mesa **mesas, Quantidade qt_mesas)
 
 bool liberar_mesa(Mesa **mesas, Quantidade qt_mesas, int num)
 {
-    printf("teste 2\n");
     for (int i = 0; i < qt_mesas.lin; i++)
     {
         for (int j = 0; j < qt_mesas.col; j++)

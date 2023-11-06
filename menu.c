@@ -46,7 +46,7 @@ void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilh
         break;
     case 2:
         num = pega_mesa();
-        if (liberar_mesa(mesas, qt_mesas,num))
+        if (liberar_mesa(mesas, qt_mesas, num))
         {
             if (fila_espera->ini != NULL)
             {
@@ -55,7 +55,6 @@ void menu(int option, Mesa **mesas, Quantidade qt_mesas, Fila *fila_espera, Pilh
                     pilha_pratos = repor_pratos(pilha_pratos);
                 }
                 coloca_grupo_na_mesa(mesas, qt_mesas, fila_espera, pilha_pratos);
-                
             }
         }
         break;
