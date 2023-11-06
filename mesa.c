@@ -30,7 +30,6 @@ Quantidade quantidade_mesas()
     return mesas;
 }
 
-
 Mesa **cria_mesas(Quantidade qt_mesas)
 {
     Mesa **mesas = aloca_mesas(qt_mesas.lin, qt_mesas.col);
@@ -75,16 +74,15 @@ void imprime_mesas(Mesa **mesas, Quantidade qt_mesas)
             case 4:
                 printf("\t ____\n\t!|oo|!\n\t!|oo|!\n\t ----");
                 break;
-            
+
             default:
                 break;
             }
             printf("\n");
-            for (Pratos* p = mesas[i][j].pratos_mesa;p != NULL;p = p->prox)
+            for (Pratos *p = mesas[i][j].pratos_mesa; p != NULL; p = p->prox)
             {
                 printf("%d - ", p->id);
             }
-            
         }
     }
 }
@@ -110,14 +108,13 @@ void reserva_mesa(int pessoas, Mesa *mesa_para_reservar, Pilha *pilha_pratos)
     mesa_para_reservar->ocupada = true;
     mesa_para_reservar->pessoas = pessoas;
     mesa_para_reservar->pratos_mesa = tirar_pratos(pessoas, pilha_pratos, mesa_para_reservar);
-
 }
 
-Pratos* liberar_prato_lista(Pratos *lista_pratos)
+Pratos *liberar_prato_lista(Pratos *lista_pratos)
 {
     while (lista_pratos != NULL)
     {
-        Pratos* p = lista_pratos->prox;
+        Pratos *p = lista_pratos->prox;
         free(lista_pratos);
         lista_pratos = p;
     }
@@ -125,7 +122,8 @@ Pratos* liberar_prato_lista(Pratos *lista_pratos)
     return lista_pratos;
 }
 
-int proxima_comanda(Mesa **mesas, Quantidade qt_mesas){
+int proxima_comanda(Mesa **mesas, Quantidade qt_mesas)
+{
     int maior = 0;
     for (int i = 0; i < qt_mesas.lin; i++)
     {
@@ -145,11 +143,11 @@ bool liberar_mesa(Mesa **mesas, Quantidade qt_mesas, int num)
     {
         for (int j = 0; j < qt_mesas.col; j++)
         {
-            if (mesas[i][j].num_mesa == num)
+            if (mesas[i][j].num_mesa == num && mesas[i][j].ocupada)
             {
                 mesas[i][j].ocupada = false;
                 mesas[i][j].pessoas = 0;
-                
+
                 mesas[i][j].pratos_mesa = liberar_prato_lista(mesas[i][j].pratos_mesa);
                 mesas[i][j].comanda = proxima_comanda(mesas, qt_mesas);
                 printf("Liberou Mesa\n");
